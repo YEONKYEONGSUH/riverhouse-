@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Riverhouse BBQ Night</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Gowun+Dodum&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: one narrow mobile column, photo first, then facts in the order a guest needs them (when, where, what to bring, parking, a small mission). */
+  :root {
+    --bg: #0e1410;
+    --surface: #151d17;
+    --fg: #f3e9d8;
+    --muted: #a8a392;
+    --accent: #f28c28;
+    --line: rgba(243, 233, 216, 0.16);
+    --font-display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+    --font-body: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 20px 56px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .page {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
+  .photo {
+    margin: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(242, 140, 40, 0.14);
+    border: 1px solid var(--line);
+  }
+  .photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center bottom; }
+  .hero { position: relative; }
+  .hero-text { position: absolute; inset: 0 0 auto 0; padding: 22px 20px; display: flex; flex-direction: column; gap: 12px; }
+
+  .title-block { display: flex; flex-direction: column; gap: 16px; }
+  .when-line {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(60px, 19vw, 92px);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .intro { margin: 0; color: var(--fg); max-width: 34ch; }
+
+  section { display: flex; flex-direction: column; gap: 20px; }
+  .label {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  h2 { margin: 0; font-size: 24px; line-height: 1.35; font-weight: 400; text-wrap: balance; }
+  p { margin: 0; }
+  .muted { color: var(--muted); }
+
+  /* When */
+  .bigdate { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .bigdate .num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 88px;
+    line-height: 0.9;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .bigdate .txt { font-size: 20px; }
+
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .facts > div { padding: 14px 12px 14px 0; min-width: 0; }
+  .facts > div + div { padding-left: 14px; border-left: 1px solid var(--line); }
+  .facts dt { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .facts dd { margin: 4px 0 0; font-family: var(--font-display); font-weight: 700; font-size: 26px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .facts dd small { display: block; margin-top: 4px; font-family: var(--font-body); font-weight: 400; font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+  .cal { max-width: 320px; }
+  .cal-head { font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 4px; text-align: center; font-variant-numeric: tabular-nums; }
+  .cal-grid .dow { font-size: 12px; color: var(--muted); padding-bottom: 6px; }
+  .cal-grid .d { font-size: 15px; line-height: 36px; height: 36px; color: var(--fg); }
+  .cal-grid .d.on {
+    background: var(--accent);
+    color: #1a1208;
+    border-radius: 50%;
+    width: 36px;
+    margin-inline: auto;
+    font-weight: 700;
+  }
+
+  /* Buttons and links */
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    font: inherit;
+    font-size: 15px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--fg);
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #1a1208; font-weight: 700; }
+  .btn:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .addr { font-size: 18px; line-height: 1.55; }
+  .addr strong { display: block; font-weight: 400; font-size: 22px; }
+
+  /* Bring list */
+  .bring { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .bring li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .sub { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
+  .bring.soft { border-top: 0; margin-top: -8px; }
+  .bring.soft li { font-size: 14px; color: var(--muted); padding: 9px 0; }
+  .bring li span { font-size: 14px; color: var(--muted); text-align: right; }
+
+  .phone { font-family: var(--font-mono); font-size: 22px; letter-spacing: 0.02em; user-select: all; }
+
+  .mission { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 24px 20px; gap: 18px; }
+  .examples { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .examples li { padding-left: 18px; position: relative; font-size: 15px; }
+  .examples li::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 8px; height: 1px; background: var(--accent); }
+
+  footer { text-align: left; padding-top: 4px; }
+  footer p { font-family: var(--font-display); font-weight: 800; font-size: 40px; line-height: 1; text-transform: uppercase; letter-spacing: 0.02em; }
+  footer .muted { margin-top: 10px; font-size: 14px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .btn { transition: border-color 0.15s ease; }
+  }
+  /* Background music button */
+  .music {
+    position: fixed;
+    right: max(16px, env(safe-area-inset-right, 0px));
+    bottom: max(16px, env(safe-area-inset-bottom, 0px));
+    z-index: 20;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    background: var(--surface);
+    color: var(--accent);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .music[aria-pressed="true"] { background: var(--accent); color: #1a1208; }
+  .music:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  body { margin: 0; }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="title-block">
+    <div class="hero">
+      <figure class="photo">
+        <img src="cover.jpg" alt="어두운 밤, 숯불 위 그릴에서 스테이크와 옥수수, 채소가 구워지고 연기가 피어오른다." width="1122" height="1402">
+      </figure>
+      <div class="hero-text">
+        <p class="when-line">2026. 11. 7. SAT · 4:00 PM</p>
+        <h1>Riverhouse<br>BBQ Night</h1>
+      </div>
+    </div>
+    <p class="intro"> 불은 4시에 붙입니다. 고기는 당신을 기다려주지 않아요 ⋰˚☆ </p>
+  </header>
+
+  <section aria-labelledby="when-h">
+    <p class="label">When</p>
+    <h2 id="when-h" class="bigdate">
+      <span class="num">11.7</span>
+      <span class="txt">2026년 11월 7일 토요일<br>오후 4시</span>
+    </h2>
+
+    <dl class="facts">
+      <div>
+        <dt>시작</dt>
+        <dd>4:00 PM</dd>
+      </div>
+      <div>
+        <dt>일몰</dt>
+        <dd>5:00 PM</dd>
+      </div>
+      <div>
+        <dt>기온</dt>
+        <dd>18° / 8°<small>최고 / 최저 (°C)</small></dd>
+      </div>
+    </dl>
+    <p class="muted">5시가 넘으면 해가 지고 많이 어둡고 추워져서, 조금 일찍 4시에 시작해요.<br>고기 먹은 후에는 실내로 들어와서 옹기종기 놀 예정이에요.<br>겉옷 챙겨 오세요⋆◡̎⋆</p>
+
+    <div class="cal" role="img" aria-label="2026년 11월 달력, 7일 토요일 강조">
+      <div class="cal-head">November 2026</div>
+      <div class="cal-grid" aria-hidden="true">
+        <span class="dow">일</span><span class="dow">월</span><span class="dow">화</span><span class="dow">수</span><span class="dow">목</span><span class="dow">금</span><span class="dow">토</span>
+        <span class="d">1</span><span class="d">2</span><span class="d">3</span><span class="d">4</span><span class="d">5</span><span class="d">6</span><span class="d on">7</span>
+        <span class="d">8</span><span class="d">9</span><span class="d">10</span><span class="d">11</span><span class="d">12</span><span class="d">13</span><span class="d">14</span>
+        <span class="d">15</span><span class="d">16</span><span class="d">17</span><span class="d">18</span><span class="d">19</span><span class="d">20</span><span class="d">21</span>
+        <span class="d">22</span><span class="d">23</span><span class="d">24</span><span class="d">25</span><span class="d">26</span><span class="d">27</span><span class="d">28</span>
+        <span class="d">29</span><span class="d">30</span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="where-h">
+    <p class="label">Where</p>
+    <h2 id="where-h" class="addr">
+      <strong>River House Apartment</strong>
+      <span id="addr-text">1400 S Joyce St, Arlington, VA 22202 | "Potomac" 빌딩으로 오세요 </span>
+    </h2>
+    <div class="actions">
+      <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=1400+S+Joyce+St+Arlington+VA+22202" target="_blank" rel="noopener">Google map</a>
+      <button class="btn" type="button" id="copy-addr" data-copy="1400 S Joyce St, Arlington, VA 22202" data-done="복사됨">Copy address</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="bring-h">
+    <p class="label">Bring</p>
+    <h2 id="bring-h">준비물</h2>
+    <ul class="bring">
+      <li>실내 슬리퍼</li>
+      <li>개인 수저세트</li>
+    </ul>
+    <p class = "sub">마음 준비물</p>
+    <ul class = "bring soft">
+      <li> 모르는 사람을 만나도 웃을 수 있는 이해심 </li>
+      <li> 노잼이더라도 표정을 숨길 수 있는 연기력 </li>
+      <li> TMI를 듣고도 놀라지 않는 리액션 </li>
+      <li> 고기 한 점 양보할 수 있는 여유 </li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="park-h">
+    <p class="label">Parking</p>
+    <h2 id="park-h">게스트 주차는 호스트에게 미리 말해주세요𖤐 </h2>
+    <p class="phone" id="host-phone">202-607-8456</p>
+    <div class="actions">
+      <button class="btn" type="button" data-copy="202-607-8456" data-done="복사됨">번호 복사</button>
+    </div>
+  </section>
+
+  <section class="mission" aria-labelledby="tmi-h">
+    <p class="label">Before you come</p>
+    <h2 id="tmi-h">나에 대한 TMI 3가지를 호스트에게 문자로 알려주세요.</h2>
+    <p class="phone">202-607-8456</p>
+    <p class="muted">예시는 아래에 있어요ᨻ </p>
+    <ul class="examples">
+      <li>나는 영화관에서 영화 시작도 전에 팝콘을 다 먹는다</li>
+      <li>마트에서 남의 카트를 내 카트인 줄 알고 한참 밀고 다녔다</li>
+      <li>머리카락을 기부해 본 적이 있다</li>
+      <li>어린이 패션쇼에 나간 적이 있다</li>
+      <li>수족냉증이라 겨울에 괴롭다</li>
+      <li>오래달리기에 자신이 있다</li>
+      <li>냉장고에 음료수를 넣을 때 줄 맞춰서 정리한다</li>
+    </ul>
+    <div class="actions">
+      <button class="btn primary" type="button" data-copy="나의 TMI 3가지&#10;1. &#10;2. &#10;3. " data-done="양식 복사됨">문자 양식 복사</button>
+      <a class="btn" href="sms:+12026078456">문자 앱 열기</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>See you Saturday</p>
+    <p class="muted">11월 7일 토요일 오후 4시, River House에서 만나용</p>
+  </footer>
+</main>
+
+<audio id="bgm" src="bgm.mp3" loop preload="none"></audio>
+<button class="music" id="music-btn" type="button" aria-pressed="false" aria-label="배경음악 켜기 또는 끄기">♪</button>
+
+<script>
+  (function () {
+    function fallbackCopy(text) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      return ok;
+    }
+    function flash(btn, msg) {
+      var old = btn.getAttribute("data-label") || btn.textContent;
+      btn.setAttribute("data-label", old);
+      btn.textContent = msg;
+      setTimeout(function () { btn.textContent = old; }, 1800);
+    }
+    document.querySelectorAll("[data-copy]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var text = btn.getAttribute("data-copy");
+        var done = btn.getAttribute("data-done") || "복사됨";
+        function ok() { flash(btn, done); }
+        function fail() { flash(btn, fallbackCopy(text) ? done : "길게 눌러 복사하세요"); }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(ok, fail);
+        } else {
+          fail();
+        }
+      });
+    });
+  })();
+
+  (function () {
+    var bgm = document.getElementById("bgm");
+    var btn = document.getElementById("music-btn");
+    if (!bgm || !btn) return;
+    btn.addEventListener("click", function () {
+      if (bgm.paused) {
+        var p = bgm.play();
+        if (p && p.then) {
+          p.then(function () { btn.setAttribute("aria-pressed", "true"); }, function () {});
+        } else {
+          btn.setAttribute("aria-pressed", "true");
+        }
+      } else {
+        bgm.pause();
+        btn.setAttribute("aria-pressed", "false");
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
