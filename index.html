@@ -171,6 +171,10 @@
   @media (prefers-reduced-motion: no-preference) {
     .btn { transition: border-color 0.15s ease; }
   }
+  .form-box { background: var(--bg); border: 1px dashed var(--line); border-radius: 4px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .form-name { font-size: 15px; }
+  .note { font-size: 14px; }
+
   /* Background music button */
   .music {
     position: fixed;
@@ -208,7 +212,7 @@
         <h1>Riverhouse<br>BBQ Night</h1>
       </div>
     </div>
-    <p class="intro"> 불은 4시에 붙입니다. 고기는 당신을 기다려주지 않아요 ⋰˚☆ </p>
+    <p class="intro"> 불은 4시에 붙입니다. 고기는 당신을 기다려주지 않아요 ☆ </p>
   </header>
 
   <section aria-labelledby="when-h">
@@ -232,7 +236,7 @@
         <dd>18° / 8°<small>최고 / 최저 (°C)</small></dd>
       </div>
     </dl>
-    <p class="muted">5시가 넘으면 해가 지고 많이 어둡고 추워져서, 조금 일찍 4시에 시작해요.<br>고기 먹은 후에는 실내로 들어와서 옹기종기 놀 예정이에요.<br>겉옷 챙겨 오세요⋆◡̎⋆</p>
+    <p class="muted">5시가 넘으면 어둡고 추워져서(일몰 5:00 PM), 조금 일찍 4시에 시작해요. 겉옷 챙겨 오세요! 고기 먹은 후에는 실내로 들어와서 옹기종기 즐거운 시간 보내보아요 ⋆◡⋆</p>
 
     <div class="cal" role="img" aria-label="2026년 11월 달력, 7일 토요일 강조">
       <div class="cal-head">November 2026</div>
@@ -254,7 +258,7 @@
       <span id="addr-text">1400 S Joyce St, Arlington, VA 22202 | "Potomac" 빌딩으로 오세요 </span>
     </h2>
     <div class="actions">
-      <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=1400+S+Joyce+St+Arlington+VA+22202" target="_blank" rel="noopener">Google map</a>
+      <a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=1400+S+Joyce+St+Arlington+VA+22202" target="_blank" rel="noopener">Google map</a>
       <button class="btn" type="button" id="copy-addr" data-copy="1400 S Joyce St, Arlington, VA 22202" data-done="복사됨">Copy address</button>
     </div>
   </section>
@@ -266,18 +270,19 @@
       <li>실내 슬리퍼</li>
       <li>개인 수저세트</li>
     </ul>
-    <p class = "sub">마음 준비물</p>
-    <ul class = "bring soft">
-      <li> 모르는 사람을 만나도 웃을 수 있는 이해심 </li>
-      <li> 노잼이더라도 표정을 숨길 수 있는 연기력 </li>
-      <li> TMI를 듣고도 놀라지 않는 리액션 </li>
-      <li> 고기 한 점 양보할 수 있는 여유 </li>
+    <p class="sub">마음 준비물</p>
+    <ul class="bring soft">
+      <li>고기 굽기에 최적화된 전완근</li>
+      <li>TMI도 리액션으로 살려내는 사회성</li>
+      <li>노잼 토크에도 웃어줄 수 있는 연기력</li>
+      <li>마지막 고기 한 점은 양보할 수 있는 대인배의 품격</li>
+      <li>게임 이길 자신은 없어도 즐길 자신은 있는 마음가짐</li>
     </ul>
   </section>
 
   <section aria-labelledby="park-h">
     <p class="label">Parking</p>
-    <h2 id="park-h">게스트 주차는 호스트에게 미리 말해주세요𖤐 </h2>
+    <h2 id="park-h">게스트 주차는 호스트에게 미리 말해주세요 ☆</h2>
     <p class="phone" id="host-phone">202-607-8456</p>
     <div class="actions">
       <button class="btn" type="button" data-copy="202-607-8456" data-done="복사됨">번호 복사</button>
@@ -288,18 +293,21 @@
     <p class="label">Before you come</p>
     <h2 id="tmi-h">나에 대한 TMI 3가지를 호스트에게 문자로 알려주세요.</h2>
     <p class="phone">202-607-8456</p>
-    <p class="muted">예시는 아래에 있어요ᨻ </p>
-    <ul class="examples">
-      <li>나는 영화관에서 영화 시작도 전에 팝콘을 다 먹는다</li>
-      <li>마트에서 남의 카트를 내 카트인 줄 알고 한참 밀고 다녔다</li>
-      <li>머리카락을 기부해 본 적이 있다</li>
-      <li>어린이 패션쇼에 나간 적이 있다</li>
-      <li>수족냉증이라 겨울에 괴롭다</li>
-      <li>오래달리기에 자신이 있다</li>
-      <li>냉장고에 음료수를 넣을 때 줄 맞춰서 정리한다</li>
-    </ul>
+    <p class="muted">양식은 아래에 있어요 ↓</p>
+    <div class="form-box">
+      <p class="form-name">제 이름은 &quot;OOO&quot; 입니다.</p>
+      <ul class="examples">
+        <li>나는 영화관에서 영화 시작도 전에 팝콘을 다 먹는다</li>
+        <li>마트에서 남의 카트를 내 카트인 줄 알고 한참 밀고 다녔다</li>
+        <li>어린이 패션쇼에 나간 적이 있다</li>
+        <li>대학 때 전과를 해본 적이 있다</li>
+        <li>냉장고에 음료수를 정리할 때 줄 맞춰 정리한다</li>
+      </ul>
+    </div>
+    <p class="muted note">위 내용은 예시예요. 나만의 TMI 3가지로 바꿔서 보내주세요.</p>
     <div class="actions">
-      <button class="btn primary" type="button" data-copy="나의 TMI 3가지&#10;1. &#10;2. &#10;3. " data-done="양식 복사됨">문자 양식 복사</button>
+      <button class="btn primary" type="button" data-copy="제 이름은 &quot;OOO&quot; 입니다.&#10;* &#10;* &#10;* " data-done="양식 복사됨">문자 양식 복사</button>
+      <button class="btn" type="button" data-copy="202-607-8456" data-done="복사됨">Copy number</button>
       <a class="btn" href="sms:+12026078456">문자 앱 열기</a>
     </div>
   </section>
