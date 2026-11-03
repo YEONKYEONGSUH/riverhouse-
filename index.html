@@ -151,10 +151,12 @@
 
   /* Bring list */
   .bring { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-  .bring li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .bring li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; color: var(--muted); }
+  .bring li strong { font-weight: 700; }
   .sub { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
-  .bring.soft { border-top: 0; margin-top: -8px; }
-  .bring.soft li { font-size: 14px; color: var(--muted); padding: 9px 0; }
+  .sub-h { margin-top: 20px; }
+  .bring.soft { margin-top: 0; }
+  .bring.soft li { color: var(--muted); }
   .bring li span { font-size: 14px; color: var(--muted); text-align: right; }
 
   .phone { font-family: var(--font-mono); font-size: 22px; letter-spacing: 0.02em; user-select: all; }
@@ -171,6 +173,12 @@
   @media (prefers-reduced-motion: no-preference) {
     .btn { transition: border-color 0.15s ease; }
   }
+  .notice { font-size: 13px; line-height: 1.6; color: var(--muted); border: 1px dashed var(--line); border-radius: 4px; padding: 10px 14px; }
+  .notice.end { margin-top: -24px; }
+  .invite { font-size: 22px; line-height: 1.4; text-wrap: balance; }
+  .hint { font-size: 13px; color: var(--muted); }
+  .shop p { font-size: 15px; }
+  .shop p strong { color: var(--accent); font-weight: 700; }
   .form-box { background: var(--bg); border: 1px dashed var(--line); border-radius: 4px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
   .form-name { font-size: 15px; }
   .note { font-size: 14px; }
@@ -203,6 +211,7 @@
 <body>
 <main class="page">
   <header class="title-block">
+    <p class="notice">중간중간 여러분들의 피드백을 반영해, invitation 내용은 조금씩 변경될 수 있습니다<br>출발 당일에도 한번 더 확인해주세요!</p>
     <div class="hero">
       <figure class="photo">
         <img src="cover.jpg" alt="어두운 밤, 숯불 위 그릴에서 스테이크와 옥수수, 채소가 구워지고 연기가 피어오른다." width="1122" height="1402">
@@ -212,7 +221,9 @@
         <h1>Riverhouse<br>BBQ Night</h1>
       </div>
     </div>
+    <p class="invite">당신을 Riverhouse BBQ Night에 초대합니다</p>
     <p class="intro"> 불은 4시에 붙입니다.<br>고기는 당신을 기다려주지 않아요 ☆ </p>
+    <p class="hint">♪ 우측 하단에 BGM 있어요 (깨알)</p>
   </header>
 
   <section aria-labelledby="when-h">
@@ -236,7 +247,7 @@
         <dd>18° / 8°<small>최고 / 최저 (°C)</small></dd>
       </div>
     </dl>
-    <p class="muted">5시가 넘으면 어둡고 추워져서(일몰 5:00 PM), 조금 일찍 4시에 시작해요. 겉옷 챙겨 오세요!<br>고기 먹은 후에는 실내로 들어와서 옹기종기 즐거운 시간 보내보아요 ⋆◡⋆</p>
+    <p class="muted">5시가 넘으면 어둡고 추워져서(일몰 5:00 PM),<br>조금 일찍 4시에 시작해요. 겉옷 챙겨 오세요!<br>고기 먹은 후에는 실내로 들어와서 옹기종기 즐거운 시간 보내보아요 ⋆◡⋆</p>
 
     <div class="cal" role="img" aria-label="2026년 11월 달력, 7일 토요일 강조">
       <div class="cal-head">November 2026</div>
@@ -267,16 +278,14 @@
     <p class="label">Bring</p>
     <h2 id="bring-h">준비물</h2>
     <ul class="bring">
-      <li>실내 슬리퍼</li>
-      <li>개인 수저세트</li>
+      <li><div><strong>1. 실내 슬리퍼</strong><br>2인 가구입니다,, 여러 게스트를 초대해본 적이 없습니다,,<br>실내화 부족 이슈 이해해주세요<br>(발이 시려워도 괜찮다면 그냥 오십쇼)</div></li>
+      <li><div><strong>2. 개인 수저세트</strong><br>혹시 누군가의 집에 대량의 일회용 수저세트가 있다면 챙겨주시면 감사하겠습니다 (꾸벅)</div></li>
     </ul>
-    <p class="sub">마음 준비물</p>
+    <h2 id="soft-h" class="sub-h">마음 준비물</h2>
     <ul class="bring soft">
       <li>고기 굽기에 최적화된 전완근</li>
-      <li>TMI도 리액션으로 살려내는 사회성</li>
-      <li>노잼 토크에도 웃어줄 수 있는 연기력</li>
-      <li>마지막 고기 한 점은 양보할 수 있는 대인배의 품격</li>
-      <li>게임 이길 자신은 없어도 즐길 자신은 있는 마음가짐</li>
+      <li>TMI도 노잼 토크도 리액션으로 살려내는 연기력</li>
+      <li>마지막 고기 한 점도, 게임 승리도 양보할 수 있는 대인배의 품격</li>
     </ul>
   </section>
 
@@ -312,10 +321,21 @@
     </div>
   </section>
 
+  <section class="mission shop" aria-labelledby="shop-h">
+    <p class="label">Costco run</p>
+    <h2 id="shop-h">🛒 장보기 멤버 모집!</h2>
+    <p>11월 7일 당일 오후 2:30, 코스트코로 장을 보러 갑니다⎝⍢⎠</p>
+    <p>평소 코스트코가 궁금하셨던 분, 장보기에 진심이신 분, 혹은 그냥 같이 구경 가고 싶으신 분 모두 환영합니다 :)</p>
+    <p>함께하실 분은 TMI 문자 마지막에 <strong>'장보기 참여!'</strong>를 추가해 주세요.</p>
+    <p class="muted">특별히 먹고싶은 음식이 있다면 미리 말해주세요.<br>장 본 이후에는 반영이 어려울 수 있어요.</p>
+  </section>
+
   <footer>
     <p>See you Saturday</p>
     <p class="muted">11월 7일 토요일 오후 4시, River House에서 만나용</p>
   </footer>
+
+  <p class="notice end">중간중간 여러분들의 피드백을 반영해, invitation 내용은 조금씩 변경될 수 있습니다<br>출발 당일에도 한번 더 확인해주세요!</p>
 </main>
 
 <audio id="bgm" src="bgm.mp3" loop preload="none"></audio>
